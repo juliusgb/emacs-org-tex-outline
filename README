@@ -1,0 +1,15 @@
+Produces a pdf outline using the latex outline package of the notes written in
+emacs org-mode.
+
+The latex outline package allows only 4 levels of depth and will have the form:
+I. First main point
+  A. First major sub-point of I.
+    1. Sup-point of A.
+      a. sub-point of 1.
+        * all other sub-points
+  B. Second major sub-point.
+
+II. Second main point.
+
+Any level deper than 4 is shown as a bullet point.
+
