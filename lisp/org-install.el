@@ -727,6 +727,16 @@ Export as LaTeX, then process through to PDF, and open.
 
 
 ;;;***
+;;;### (autoloads (org-export-as-latex-outline) "lisp/org-export-latex-outline" "lisp/org-export-latex-outline.el"
+;;; Generated autoloads from lisp/org-export-as-latex-outline.el
+
+(autoload 'org-export-as-latex-outline "org-export-latex-outline" "\
+   same documentation string as the function.
+
+   \(fn arg)" t nil)
+
+
+;;;***
 
 ;;;### (autoloads (org-id-find org-id-goto org-id-get-with-outline-drilling
 ;;;;;;  org-id-get-with-outline-path-completion org-id-get org-id-copy
