@@ -1,0 +1,341 @@
+#+TITLE My approach
+
+* Approach 1:
+1. Modify the org-exp.el file by adding the commands to produce the LaTex
+   output.
+
+** Modifying org-exp.el.
+Added another option for the latex outline and the corresponding command:
+#+BEGIN_SRC emacs-lisp -n (?o org-export-as-latex-outline t) #+END_SRC
+
+2. Copy & Paste org-export-as-latex.el and change what I need.
+   I need to change the header of the file, adding the outlines package.
+   I need to add the body of my file.
+
+
+* Approach 2:
+1. Modify the org-exp.el file by adding the commands to produce the LaTex
+   output.[1] testing footnotes.
+2. In my own extension, get only the body of the latex document. I'm hoping that
+   after I specify the header and footer information, I can glue all these three
+   parts together.
+
+** Loading my file
+*** Patch /org-install.el/
+I'm goint to patch /org-install.el/ to add your file. It uses many [[http://www.chemie.fu-berlin.de/chemnet/use/info/elisp/elisp_14.html#SEC170][autoload]]
+functions.
+Function: *autoload* /function filename &optional docstring interactive type/.
+
+Add the following snippet after lisp/org-export-latex.el autoloads
+have been generated.
+#+BEGIN_SRC elisp-n
+  ;;;***
+  ;;;### (autolaods (org-export-as-outline-pdf-and-open
+  org-export-as-outline-pdf org-export-as-latex-outline
+  ) "lisp/org-export-latex-outline" "lisp/org-export-latex-outline.el"
+  ;;; Generated autoloads from lisp/org-export-as-latex-outline.el
+
+  (autoload 'org-export-as-latex-outline "org-export-latex-outline" "\
+   same documentation string as the function.
+
+   \(fn arg)" t nil)
+#+END_SRC
+
+Note the difference in the names: function name has /as/ as a substring whereas
+the filename doesn't.
+
+*** Autoload my custom function
+Add the magic autoload comment, /;;;###autoload/, to the
+/org-export-latex-outline/ function that's going to be autoloaded.
+
+*** "Hello world" works like a charm.
+
+*** Distributing it to people, they're gonna complain.
+Get people to download and put my file with the other org-*.el files.
+I'd prefer it if the outline extension was in it's own package because I've also
+patched /org-exp.el/.
+
+Excuses:
+  1. My first emacs hacking, hence I don't know any better.
+  2. Code is pre-alpha, so I welcome comments and pointers referring me to how I
+     can improve it.
+
+** Generate LaTex file
+*** Problems
+**** Header
+Find out how to modify the header. For I need to add the /outlines/ package to
+the the latex file.
+
+See line 688 in org-export-latex-m.el
+  use /org-export-latex-header/ to insert custom header
+  use /org-export-latex-packages-alist/ to add extra packages
+  see function /plist-get/ for additional commands in the header
+  see function /org-export-with-toc/. I'd like to disable it for the outline
+    doesn't need toc.
+
+What does 'header' in this context mean?
+
+How can you use the /org-export-as-latex/? Maybe, define a function that takes
+an argument and calls /org-export-as-latex/ with specific, concrete parameters.
+
+Find out how to change the paper's dimension to
+#+BEGIN_SRC latex-n
+  \setlength{\topmargin}{-.5in}
+  \setlength{\textheight}{9in}
+  \setlength{\oddsidemargin}{.125in}
+  \setlength{\textwidth}{6.25in}
+#=END_SRC
+
+I also need to change the sectioning of the document: from \section{} of the
+article package to \1{} of the outline package.
+
+  I can change this in the org-export-latex-classes. Why not just add it in the
+  org-export-latex-classes in the org-export-latex.el file, like so?
+
+#+BEGIN_SRC emacs-lisp -n
+  ("outline"
+   "\\documentclass[11pt,a4paper]{article}
+   \\usepackage[utf8]{inputenc}
+   \\usepackage[T1]{fontenc}
+   \\usepackage{graphicx}
+   \\usepackage{hyperref}
+   \\usepackage{outlines}"
+   ("\\1[] %s" . "\\1*[] %s")
+   ("\\2[] %s" . "\\2*[] %s")
+   ("\\3[] %s" . "\\3*[] %s")
+   ("\\4[] %s" . "\\4*[] %s"))
+#+END_SRC
+
+The problem with the above transliteration, if you want to call it that, is that
+you need to specify the numbering of the outline yourself whereas the
+section-ing of the article class automatically numbers itself.
+
+The packages go are inserted in the header.
+
+**** Body
+I need the body alone because to use the /outline/ package, because the body has
+to be between the \begin{outline} and \end{outline} tags/elements/commands.
+
+The good thing about the setting the BODY-ONLY argument is that it leaves out
+the header, footer, and table of contents.
+
+To return the body only, I need to call the org-export-as-latex function and set
+the BODY-ONLY argument.
+How do I set this argument? Probably by passing 1 as the value for the BODY-ONLY
+argument.
+
+How do I use this function in my custom .el file?
+  Look up details about how to load a file and use its functions. It's analogues
+  to importing classes in Java.
+
+#+BEGIN_SRC elisp-n
+;;;###autoload
+(defun org-export-as-latex-outline (arg &optional hidden ext-plist
+                                    to-buffer body-only pub-dir)
+  "Export current buffer to a LaTex file."
+  let arg = 4  ;; levels of the outline which should be headings.
+#=END_SRC
+
+Find what these functions do:
+(org-update-radio-target-regexp):
+  Command: Find all radio targets in this file and update the regular
+  expression.
+
+string-for-export
+re-search-forward
+variable header, odd
+function org-export-latex-parse-global
+
+See line 440 of org-export-as-latex function in org-export-latex.el
+add the line, (insert header), where header = .... once u find the definition
+
+
+**** Footer
+
+*** Process PDF
+*** Output the processed PDF
+
+
+
+* Generating LaTex
+Found the most important variable, i.e., /org-export-latex-options-plist/
+
+
+* Questions
+** Where is the org-export-as-latex function?
+I've seen 3 related functions: org-export-as-latex, org-export-as-latex-batch,
+and org-export-as-latex-to-batch
+
+** What does it do?
+First, it's an /autoload/ function.
+
+Variables of interest
+call org-export-as-latex with 4 levels, i.e., the value for the ARG variable
+will be 4.
+
+When BODY-ONLY is set, don't produce the file header and footer,
+simply return the content of \begin{document}...\end{document},
+without even the \begin{document} and \end{document} commands.
+
+What does each of these functions do?
+  (interactive ...): it distinguishes the function as an interactive /command/,
+  i.e., invoked from a keybinding or by typing *M-x command-name*
+  (when ... )
+  (not ... ), (or ... )
+  (buffer-base-buffer)
+
+
+#+BEGIN_SRC lisp
+
+(defun org-export-as-latex (arg &optional hidden ext-plist
+        to-buffer body-only pub-dir)
+  "Export current buffer to a LaTeX file.
+If there is an active region, export only the region.  The prefix
+ARG specifies how many levels of the outline should become
+headlines.  The default is 3.  Lower levels will be exported
+depending on `org-export-latex-low-levels'.  The default is to
+convert them as description lists.  When HIDDEN is non-nil, don't
+display the LaTeX buffer.  EXT-PLIST is a property list with
+external parameters overriding org-mode's default settings, but
+still inferior to file-local settings.  When TO-BUFFER is
+non-nil, create a buffer with that name and export to that
+buffer.  If TO-BUFFER is the symbol `string', don't leave any
+buffer behind but just return the resulting LaTeX as a string.
+When BODY-ONLY is set, don't produce the file header and footer,
+simply return the content of \begin{document}...\end{document},
+without even the \begin{document} and \end{document} commands.
+when PUB-DIR is set, use this as the publishing directory."
+  (interactive "P")
+  ;; Make sure we have a file name when we need it.
+  (when (and (not (or to-buffer body-only))
+       (not buffer-file-name))
+    (if (buffer-base-buffer)
+  (org-set-local 'buffer-file-name
+           (with-current-buffer (buffer-base-buffer)
+       buffer-file-name))
+      (error "Need a file name to be able to export")))
+
+  (message "Exporting to LaTeX...")
+  (org-update-radio-target-regexp)
+  (org-export-latex-set-initial-vars ext-plist arg)
+  (let* ((wcf (current-window-configuration))
+   (opt-plist org-export-latex-options-plist)
+   (region-p (org-region-active-p))
+   (rbeg (and region-p (region-beginning)))
+   (rend (and region-p (region-end)))
+   (subtree-p
+    (when region-p
+      (save-excursion
+        (goto-char rbeg)
+        (and (org-at-heading-p)
+       (>= (org-end-of-subtree t t) rend)))))
+   (opt-plist (if subtree-p
+      (org-export-add-subtree-options opt-plist rbeg)
+          opt-plist))
+   ;; Make sure the variable contains the updated values.
+   (org-export-latex-options-plist opt-plist)
+   (title (or (and subtree-p (org-export-get-title-from-subtree))
+        (plist-get opt-plist :title)
+        (and (not
+        (plist-get opt-plist :skip-before-1st-heading))
+       (org-export-grab-title-from-buffer))
+        (file-name-sans-extension
+         (file-name-nondirectory buffer-file-name))))
+   (filename (concat (file-name-as-directory
+          (or pub-dir
+        (org-export-directory :LaTeX ext-plist)))
+         (file-name-sans-extension
+          (or (and subtree-p
+             (org-entry-get rbeg "EXPORT_FILE_NAME" t))
+        (file-name-nondirectory ;sans-extension
+         buffer-file-name)))
+         ".tex"))
+   (filename (if (equal (file-truename filename)
+            (file-truename buffer-file-name))
+           (concat filename ".tex")
+         filename))
+   (buffer (if to-buffer
+         (cond
+          ((eq to-buffer 'string) (get-buffer-create
+                 "*Org LaTeX Export*"))
+          (t (get-buffer-create to-buffer)))
+       (find-file-noselect filename)))
+   (odd org-odd-levels-only)
+   (header (org-export-latex-make-header title opt-plist))
+   (skip (cond (subtree-p nil)
+         (region-p t)
+     ;; never skip first lines when exporting a subtree
+         (t (plist-get opt-plist :skip-before-1st-heading))))
+   (text (plist-get opt-plist :text))
+   (first-lines (if skip "" (org-export-latex-first-lines)))
+   (coding-system (and (boundp 'buffer-file-coding-system)
+           buffer-file-coding-system))
+   (coding-system-for-write (or org-export-latex-coding-system
+              coding-system))
+   (save-buffer-coding-system (or org-export-latex-coding-system
+          coding-system))
+         (region (buffer-substring
+      (if region-p (region-beginning) (point-min))
+      (if region-p (region-end) (point-max))))
+   (string-for-export
+    (org-export-preprocess-string
+     region :emph-multiline t
+      :for-LaTeX t
+      :comments nil
+      :add-text (if (eq to-buffer 'string) nil text)
+      :skip-before-1st-heading skip
+      :select-tags (plist-get opt-plist :select-tags)
+      :exclude-tags (plist-get opt-plist :exclude-tags)
+      :LaTeX-fragments nil)))
+
+    (set-buffer buffer)
+    (erase-buffer)
+
+    (and (fboundp 'set-buffer-file-coding-system)
+   (set-buffer-file-coding-system coding-system-for-write))
+
+    ;; insert the header and initial document commands
+    (unless (or (eq to-buffer 'string) body-only)
+      (insert header))
+
+    ;; insert text found in #+TEXT
+    (when (and text (not (eq to-buffer 'string)))
+      (insert (org-export-latex-content
+         text '(lists tables fixed-width keywords))
+         "\n\n"))
+
+    ;; insert lines before the first headline
+    (unless (or skip (eq to-buffer 'string))
+      (insert first-lines))
+
+    ;; handle the case where the region does not begin with a section
+    (when region-p
+      (insert (with-temp-buffer
+    (insert string-for-export)
+    (org-export-latex-first-lines))))
+
+    ;; export the content of headlines
+    (org-export-latex-global
+     (with-temp-buffer
+       (insert string-for-export)
+       (goto-char (point-min))
+       (when (re-search-forward "^\\(\\*+\\) " nil t)
+   (let* ((asters (length (match-string 1)))
+    (level (if odd (- asters 2) (- asters 1))))
+     (setq org-export-latex-add-level
+     (if odd (1- (/ (1+ asters) 2)) (1- asters)))
+     (org-export-latex-parse-global level odd)))))
+
+    ;; finalization
+    (unless body-only (insert "\n\\end{document}"))
+    (or to-buffer (save-buffer))
+    (goto-char (point-min))
+    (message "Exporting to LaTeX...done")
+    (prog1
+  (if (eq to-buffer 'string)
+      (prog1 (buffer-substring (point-min) (point-max))
+        (kill-buffer (current-buffer)))
+    (current-buffer))
+      (set-window-configuration wcf))))
+
+#+END_SRC
