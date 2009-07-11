@@ -9,6 +9,6 @@
 ;;;###autoload
 (defun org-export-as-latex-outline (arg)
   (interactive "P")
-  (message "found org-export-latex-outline"))
+  (message "hello world."))
 
 (provide 'org-export-latex-outline)
