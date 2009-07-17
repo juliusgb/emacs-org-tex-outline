@@ -13,8 +13,6 @@ II. Second main point.
 
 Any level deeper than 4 is shown as a bullet point.
 
-<<<<<<< HEAD:README
-=======
 
 Current state:
 ********************
@@ -32,7 +30,7 @@ Installation:
 
   1. Save org-export-latex-outline.el in the /path/to/org-mode/lisp/
      directory.
-  2. Apply the email-formatted patch to both org-exp.el and org-install.el.
+  2. Apply the patches to both org-exp.el and org-install.el.
   3. Re-start emacs.
 
 The interactive function can be called by
@@ -70,4 +68,3 @@ It would be ideal if:
       of contents at the top an org file that's to be exported to latex.
 
 The code is pre-pre-alpha. Any suggestions / contributions warmly welcomed.
->>>>>>> 06a86d1... Added current status to readme and licence to org-export-latex-outline.:README
