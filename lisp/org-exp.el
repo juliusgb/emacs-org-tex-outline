@@ -1995,7 +1995,7 @@ When LEVEL is non-nil, increase section numbers on that level."
     (concat string term)))
 
 (defun org-number-to-counter (n type)
-  "Concert number N to a string counter, according to TYPE.
+  "Convert number N to a string counter, according to TYPE.
 TYPE must be a string, any of:
  1  number
  A  A,B,....
