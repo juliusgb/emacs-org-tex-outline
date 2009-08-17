@@ -89,8 +89,8 @@
 
 (defvar org-export-latex-outline-class "outline")
 (defvar org-export-latex-outline-header nil)
-(defvar org-export-with-toc nil) ;; don't create table of contents
-(defvar org-export-headline-levels 4)
+(setq org-export-with-toc nil) ;; don't create table of contents
+(setq org-export-headline-levels 4)
 (defvar org-export-latex-packages-alist nil)
 
 ;; The next line contains the magic autoload comment
@@ -285,6 +285,10 @@ OPT-PLIST is the options plist for current buffer."
      ;; beginning of the outline
      "\\begin{outline}\n\n")))
 
+
+;(defun reset-variables ()
+(setq org-export-with-toc t)
+(setq org-export-headline-levels 4)
 
 
 (provide 'org-export-latex-outline)
