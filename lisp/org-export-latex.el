@@ -100,7 +100,7 @@
     ("outline"
      "\\documentclass[11pt,a4paper]{article}
 \\usepackage[utf8]{inputenc}
-\\usepackage[T1]{fontenc}
+\% \\usepackage[T1]{fontenc} does not work in MikTex 2.6 on Windows XP
 \\usepackage{graphicx}
 \\usepackage{hyperref}
 \\usepackage{outlines}
