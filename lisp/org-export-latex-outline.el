@@ -231,7 +231,8 @@
             (prog1 (buffer-substring (point-min) (point-max))
               (kill-buffer (current-buffer)))
           (current-buffer))
-      (set-window-configuration wcf))))
+      (set-window-configuration wcf)))
+  (org-export-as-pdf-and-open arg))
 
 
 (defun org-export-latex-make-header (title opt-plist)
