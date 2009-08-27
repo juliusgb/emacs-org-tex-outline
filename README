@@ -18,8 +18,7 @@ Current state:
 ********************
 
 Please note that at the moment, when the outline export command is executed,
-it just prints "hello world" in the minibuffer. Maybe others can develop it
-further.
+the resulting pdf is outlined but not numbered as the format above.
 
 Download:
 ********************
@@ -30,8 +29,10 @@ Installation:
 
   1. Save org-export-latex-outline.el in the /path/to/org-mode/lisp/
      directory.
-  2. Apply the patches to both org-exp.el and org-install.el.
+  2. Apply the patches to both org-exp.el, org-install.el and org-export-latex.el.
   3. Re-start emacs.
+  4. Add #+LATEX_CLASS: outline to the top of the org file you wish to export as
+    an outline.
 
 The interactive function can be called by
 
@@ -46,25 +47,18 @@ based on the number of stars, the latex outline package requires you to
 manually number your outline (maybe I'm missing something or I'm using an
 unsuitable latex package).
 
-The current solution is to transfer that manual numbering to myself as I
-write the outline, resulting in an org file of this format:
+I've discovered that elisp code can't be executed where the outline class is
+defined in org-export-latex.el. See the association list which consists of other
+latex classes.
 
-   * I. Main Point 1.
-     ** A. Sub-point of 1.
-       *** 1. Sub-sub-point of 1.
-       *** 2. Sub-sub-point of 2.
-     ** B. Sub-point of 1.
-   * II. Main Point 2.
-     ** A. Sub-point of 2.
-   * III. Main Point 3.
+The workaround is to create a custom latex package that handles the formatting and
+numbering of the headlines so that:
+  (1)  We don't manually number the headlines
+  (2)  It's easy to use with org-mode since the custom latex package would take
+       the headline as an argument and format it, something the outline package
+       doesn't do.
 
-Talk about ugly and the inconvenience when you move the subtrees.
+That's what I'm working on.
 
-It would be ideal if:
-  (1) the numbering was done automatically based on the number of stars on
-      each heading,
-  (2) we had the option to customise our own numbering at the top of the
-      org file just as we can customise whether to include the date or table
-      of contents at the top an org file that's to be exported to latex.
 
-The code is pre-pre-alpha. Any suggestions / contributions warmly welcomed.
+The code is pre-alpha. Any suggestions / contributions warmly welcomed.
