@@ -28,55 +28,46 @@
 ;; org-export-latex-outline.el - Produces a pdf outline of the notes written in
 ;; emacs org-mode using the latex outline package.
 ;;
-;; Please note that at the moment, when the outline export command is executed,
-;; it just prints "hello world" in the minibuffer. Maybe others can develop it
-;; further.
+;; The latex outline package allows only 4 levels of depth and will have the
+;; form:
+;; I. First main point
+;;  A. First major sub-point of I.
+;;    1. Sup-point of A.
+;;      a. sub-point of 1.
+;;
+;;  B. Second major sub-point.
+;;    1. Sub-point of B.
+;;
+;; II. Second main point.
+;;
+;;
+;;; Current state:
+;;
+;; Please note that at the moment, this works with org-6.10a. I wanted to have a
+;; working version before porting it to the current version of org-mode.
+;;
+;; Now that it's working, let the porting begin!
+;;
 ;;
 ;;; Download:
 ;;
-;;   $ http://github.com/juliusgb/emacs-org-tex-outline.git
+;;  $ http://github.com/juliusgb/emacs-org-tex-outline.git
 ;;
 ;;; Installation:
 ;;
-;;   1. Save org-export-latex-outline.el in the /path/to/org-mode/lisp/
-;;      directory.
-;;   2. Apply the email-formatted patch to both org-exp.el and org-install.el.
-;;   3. Re-start emacs.
+;;  1. Save org-export-latex-outline.el in the /path/to/org-mode/lisp/
+;;     directory.
+;;  2. Apply the patches to both org-exp.el, org-install.el and
+;;     org-export-latex.el.
+;;  3. Re-start emacs.
+;;  4. Add '#+LATEX_CLASS: outline' to the top of the org file you wish to export
+;;     as an outline.
 ;;
-;; The interactive function can be called by
+;;The interactive function can be called by
 ;;
 ;; M-x `org-export-latex-as-outline'
 ;;
-;;; Notes:
-;;
-;; The difficult part is exporting the body. Unlike the latex article class,
-;; which automatically numbers the sections of the notes written in org-mode
-;; based on the number of stars, the latex outline package requires you to
-;; manually number your outline (maybe I'm missing something or I'm using an
-;; unsuitable latex package).
-;;
-;; The current solution is to transfer that manual numbering to myself as I
-;; write the outline, resulting in an org file of this format:
-;;
-;;   * I. Main Point 1.
-;;     ** A. Sub-point of 1.
-;;       *** 1. Sub-sub-point of 1.
-;;       *** 2. Sub-sub-point of 2.
-;;     ** B. Sub-point of 1.
-;;   * II. Main Point 2.
-;;     ** A. Sub-point of 2.
-;;   * III. Main Point 3.
-;;
-;; Talk about ugly and the inconvenience when you move the subtrees.
-;;
-;; It would be ideal if:
-;;  (1) the numbering was done automatically based on the number of stars on
-;;      each heading,
-;;  (2) we had the option to customise our own numbering at the top of the
-;;      org file just as we can customise whether to include the date or table
-;;      of contents at the top an org file that's to be exported to latex.
-;;
-;; The code is pre-pre-alpha. Any suggestions / contributions warmly welcomed.
+;; The code is pre-alpha. Any suggestions / contributions warmly welcomed.
 ;;
 ;;; Code:
 
