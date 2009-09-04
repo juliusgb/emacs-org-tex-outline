@@ -1,0 +1,87 @@
+#+LATEX_CLASS: outline
+#+TITLE: Test with long outline points
+
+* Heading 1
+Wisi iusto suscipit feugait, te crisare ea delenit. Augue et suscipit... laoreet
+et ipsum dolore, illum sit duis feugait. Ea at, ut; ad sit iusto qui feugait,
+qui ullamcorper consequatvel feugiat duis feugiat. Facilisi, ea accumsan dolore
+luptatum ut lorem suscipit consequat illum, dolore illum ut; augue vel ex,
+crisare diam augue quis delenit at. Magna dolore ex ad hendrerit minim... erat
+sed blandit feugait ex eum lobortis tincidunt delenit te diam sciurus wisi. Eros
+ea iusto nulla! Wisi accumsan lobortis sciurus ut accumsan dolore; amet ut quis
+nulla dignissim nisl feugait veniam facilisi.
+
+** Sub-heading
+Esse enim dolor amet qui, feugiat dolor iriuredolor sit! Vulputate delenit
+blandit, dolore molestie exerci ullamcorper? Quis veniam; consequat consectetuer
+commodo sed, illum minim sed eros nonummy sed te, nisl dolore, nulla facilisis
+nulla esse lobortis accumsan, at iriuredolor? Duis nostrud laoreet dolor
+hendrerit, velit feugait ut nulla crisare iusto consequat quis commodo suscipit
+vel! Eu nulla dignissim laoreet nulla sciurus molestie enim, suscipit facilisis
+hendrerit nulla ea dolor, ut iusto esse in minim. In commodo dignissim sit
+praesent dolore vero dolore tation consequatvel feugait qui; duis commodo qui
+nibh, et wisi.
+
+*** Sub-sub-heading
+Praesent diam velit, nisl feugiat tation dolore, duis qui autem in. Lobortis,
+feugiat magna vero nisl, consequat eum ex tincidunt illum; lobortis eu
+consequatvel eu illum. Dolor ut nibh quis; duis luptatum sed euismod dolore ex
+iusto. Facilisis vero ad consectetuer facilisi praesent veniam magna feugait
+iusto, in vel. Feugait blandit facilisis augue eros et facilisis eu ad exerci,
+autem veniam quis, autem Ñ in odio. Hendrerit ad, in et vulputate luptatum
+autem; laoreet delenit ut sed duis feugiat blandit! Dolore veniam quis nisl
+sit... veniam nibh sit, ullamcorper accumsan nulla, nonummy molestie praesent,
+dolore feugiat! Consectetuer tation dolor eum nulla consectetuer tincidunt
+dignissim esse.
+
+**** sub-sub-sub-heading
+Dignissim in adipiscing quis adipiscing laoreet, ullamcorper consequatvel minim
+Ñ delenit ut amet veniam vel dolore in suscipit consectetuer nisl
+dolore. Aliquip consequat, feugiat consequat hendrerit lobortis eum delenit
+dolor et nulla, in et duis! Aliquip veniam augue esse vulputate odio dignissim
+accumsan sed minim iriuredolor consequat ut dolor Ñ duis iriuredolor. Qui ut
+nonummy aliquip et quis ea. Ad nonummy; ut sed qui et blandit lorem. Eum ut,
+facilisis Ñ exerci sciurus minim ut, augue ut adipiscing! Magna facilisi ea
+exerci feugait vulputate dolore nibh feugiat ut eu in, veniam iriure dolor
+dolore in; iusto aliquip facilisi delenit eum. Dolor veniam quis aliquip dolore
+nulla. Consequat illum nulla qui... eu vulputate eu volutpat ea nisl feugait vel
+sciurus, tation praesent ut velit?
+
+
+
+** Sub-heading2
+Nisl veniam molestie; augue feugiat iriuredolor sed, consequatvel in praesent
+ipsum euismod autem esse ut et accumsan duis.
+
+*** Sub-Sub-heading
+Veniam nostrud exerci ut blandit,
+delenit ea in, iriure; dolore crisare dolor augue ad consequatvel, ex lobortis
+et amet accumsan nibh delenit in nulla!
+
+**** Sub-sub-sub-heading
+Nulla ullamcorper ex; et veniam dolore minim facilisis accumsan facilisis,
+facilisi duis ut facilisi.
+
+
+
+* Heading 2
+Consequat magna in eum N iriure, molestie iusto consectetuer praesent lobortis
+autem iusto ut et nostrud, praesent augue ea dolore. Lorem dolor esse lobortis
+duis et vero consequat wisi et veniam augue? Ipsum, blandit augue dignissim
+luptatum suscipit nonummy feugait tation qui dolore vero duis exerci te.
+
+** Sub-heading
+Nisl veniam molestie; augue feugiat iriuredolor sed, consequatvel in praesent
+ipsum euismod autem esse ut et accumsan duis.
+
+*** Sub-Sub-heading
+Veniam nostrud exerci ut blandit,
+delenit ea in, iriure; dolore crisare dolor augue ad consequatvel, ex lobortis
+et amet accumsan nibh delenit in nulla!
+
+**** Sub-sub-sub-heading
+Nulla ullamcorper ex; et veniam dolore minim facilisis accumsan facilisis,
+facilisi duis ut facilisi.
+
+
+* Heading 3
