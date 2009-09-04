@@ -30,6 +30,7 @@
 ;;
 ;; The latex outline package allows only 4 levels of depth and will have the
 ;; form:
+;;
 ;; I. First main point
 ;;  A. First major sub-point of I.
 ;;    1. Sup-point of A.
