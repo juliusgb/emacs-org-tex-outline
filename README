@@ -6,8 +6,9 @@ I. First main point
   A. First major sub-point of I.
     1. Sup-point of A.
       a. sub-point of 1.
-        * all other sub-points
+
   B. Second major sub-point.
+    1. Sub-point of B.
 
 II. Second main point.
 
@@ -17,8 +18,11 @@ Any level deeper than 4 is shown as a bullet point.
 Current state:
 ********************
 
-Please note that at the moment, when the outline export command is executed,
-the resulting pdf is outlined but not numbered as the format above.
+Please note that at the moment, this works with org-6.10a. I wanted to have a
+working version before porting it to the current version of org-mode.
+
+Now that it's working, let the porting begin!
+
 
 Download:
 ********************
@@ -29,36 +33,14 @@ Installation:
 
   1. Save org-export-latex-outline.el in the /path/to/org-mode/lisp/
      directory.
-  2. Apply the patches to both org-exp.el, org-install.el and org-export-latex.el.
+  2. Apply the patches to both org-exp.el, org-install.el and
+     org-export-latex.el.
   3. Re-start emacs.
-  4. Add #+LATEX_CLASS: outline to the top of the org file you wish to export as
-    an outline.
+  4. Add '#+LATEX_CLASS: outline' to the top of the org file you wish to export
+     as an outline.
 
 The interactive function can be called by
 
 M-x `org-export-latex-as-outline'
-
-Notes:
-********************
-
-The difficult part is exporting the body. Unlike the latex article class,
-which automatically numbers the sections of the notes written in org-mode
-based on the number of stars, the latex outline package requires you to
-manually number your outline (maybe I'm missing something or I'm using an
-unsuitable latex package).
-
-I've discovered that elisp code can't be executed where the outline class is
-defined in org-export-latex.el. See the association list which consists of other
-latex classes.
-
-The workaround is to create a custom latex package that handles the formatting and
-numbering of the headlines so that:
-  (1)  We don't manually number the headlines
-  (2)  It's easy to use with org-mode since the custom latex package would take
-       the headline as an argument and format it, something the outline package
-       doesn't do.
-
-That's what I'm working on.
-
 
 The code is pre-alpha. Any suggestions / contributions warmly welcomed.
