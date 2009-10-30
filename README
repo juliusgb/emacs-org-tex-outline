@@ -18,10 +18,9 @@ Any level deeper than 4 is shown as a bullet point.
 Current state:
 ********************
 
-Please note that at the moment, this works with org-6.10a. I wanted to have a
-working version before porting it to the current version of org-mode.
-
-Now that it's working, let the porting begin!
+Please note that at the moment, this works with org-mode-6.30e. 
+This version of org-mode uses the soul latex package when exporting to latex. 
+The soul package is on CTAN: http://www.ctan.org/tex-archive/macros/latex/contrib/soul/
 
 
 Download:
@@ -31,10 +30,10 @@ Download:
 
 Installation:
 
-  1. Save org-export-latex-outline.el in the /path/to/org-mode/lisp/
+  1. Save org-latex-outline.el in the /path/to/org-mode/lisp/
      directory.
   2. Apply the patches to both org-exp.el, org-install.el and
-     org-export-latex.el.
+     org-latex.el.
   3. Re-start emacs.
   4. Add '#+LATEX_CLASS: outline' to the top of the org file you wish to export
      as an outline.
@@ -43,4 +42,4 @@ The interactive function can be called by
 
 M-x `org-export-latex-as-outline'
 
-The code is pre-alpha. Any suggestions / contributions warmly welcomed.
+The code is beta. Any suggestions / contributions warmly welcomed.
