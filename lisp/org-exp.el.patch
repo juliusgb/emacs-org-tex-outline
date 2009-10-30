@@ -1,0 +1,21 @@
+diff --git a/lisp/org-exp.el b/lisp/org-exp.el
+index a62a09b..ceb8a6c 100644
+--- a/lisp/org-exp.el
++++ b/lisp/org-exp.el
+@@ -840,6 +840,8 @@ value of `org-export-run-in-background'."
+ \[p] export as LaTeX and process to PDF
+ \[d] export as LaTeX, process to PDF, and open the resulting PDF document
+ 
++\[o] export as LaTex Outline, process to PDF, and open resulting PDF document
++
+ \[D] export as DocBook
+ \[V] export as DocBook, process to PDF, and open the resulting PDF document
+ 
+@@ -868,6 +870,7 @@ value of `org-export-run-in-background'."
+ 	    (?l org-export-as-latex t)
+ 	    (?p org-export-as-pdf t)
+ 	    (?d org-export-as-pdf-and-open t)
++		(?o org-export-as-latex-outline t)
+ 	    (?L org-export-as-latex-to-buffer nil)
+ 	    (?i org-export-icalendar-this-file t)
+ 	    (?I org-export-icalendar-all-agenda-files t)
