@@ -1,0 +1,26 @@
+Changes in HEAD
+	Modified lisp/org-install.el
+diff --git a/lisp/org-install.el b/lisp/org-install.el
+index fce7cad..46e3ccb 100644
+--- a/lisp/org-install.el
++++ b/lisp/org-install.el
+@@ -1114,6 +1114,18 @@ Export as LaTeX, then process through to PDF, and open.
+ \(fn ARG)" t nil)
+ 
+ ;;;***
++
++;;;### (autoloads (org-export-as-latex-outline) "lisp/org-latex-outline" "lisp/org-latex-outline.el"
++;;; Generated autoloads from lisp/org-latex-outline.el
++
++(autoload 'org-export-as-latex-outline "org-latex-outline" "\
++Export current buffer as an outline to a LaTeX file.
++ARG specifies how many levels of the outline should become
++headlines. The default is 4.
++
++\(fn ARG &optional HIDDEN EXT-PLIST TO-BUFFER BODY-ONLY PUB-DIR)" t nil)
++
++;;;***
+ 
+ ;;;### (autoloads (org-mobile-create-sumo-agenda org-mobile-pull
+ ;;;;;;  org-mobile-push) "org-mobile" "lisp/org-mobile.el" (19199
+
